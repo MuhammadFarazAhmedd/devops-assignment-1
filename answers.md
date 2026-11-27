@@ -486,7 +486,7 @@ To github.com:MuhammadFarazAhmedd/devops-assignment-1.git
 
 ## Part 5
 
-### Task 1: apache2
+### Task 1:
 
 **Commands:**
 sudo apt update
@@ -519,7 +519,7 @@ sudo journalctl -u apache2 --since today
 systemctl start runs the service right now, but it will not start again after a reboot. systemctl enable makes it start automatically at every boot, but it does not start it right now.
 After stop, the status is inactive (dead) and curl cannot connect because nothing is listening on port 80. journalctl -u apache2 --since today shows only today's logs of the apache2 service.
 
-### Task 2: Environment variable
+### Task 2: 
 
 **Commands:**
 export APP_ENV=staging
@@ -538,3 +538,56 @@ staging
 export only sets the variable for the current terminal. A new terminal starts fresh, so the variable is gone. To make it permanent I would add export APP_ENV=staging to the ~/.bashrc file.
 
 
+## Task 3:
+
+Commands:
+```
+sudo systemctl enable --now ssh
+hostname -I
+whoami
+ssh-copy-id ali@192.168.0.39
+ssh ali@192.168.0.39
+whoami
+exit
+echo "Hello from Faraz" > hello-from-faraz.txt
+scp hello-from-faraz.txt ali@192.168.0.39:~/
+ssh ali@192.168.0.39 "cat ~/.ssh/authorized_keys"
+```
+
+Output:
+```
+My machine:
+192.168.0.35
+faraz
+
+Partner's machine (Ali):
+192.168.0.39
+ali
+
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: ssh-add -L
+The authenticity of host '192.168.0.39 (192.168.0.39)' can't be established.
+ED25519 key fingerprint is: SHA256:GLcqP+eANRFD9spljsJQekOCfu25tQW1jgKqYrJDcZk
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+ali@192.168.0.39's password:
+
+Number of key(s) added: 1
+
+Login with no password:
+ali@ali-ThinkPad-T450:~$ whoami
+ali
+ali@ali-ThinkPad-T450:~$ exit
+logout
+Connection to 192.168.0.39 closed.
+
+File copy:
+hello-from-faraz.txt     100%   17     3.2KB/s   00:00
+
+Partner's authorized_keys:
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCQaaH84osK8AZZSZjWJUspmGZwkifMIHxqRGvAg6ff fu96555@gmail.com
+```
+
+Explanation:
+He writes his own explanation — same points as yours: the private key (`~/.ssh/id_ed25519`, no `.pub`) must stay on his machine only; the public key is safe to share and is what gets installed in your authorized_keys; if someone copies his private key they can log in as him to every machine and GitHub account that trusts it.
+
+Tell him to word it himself — the assignment says partner tasks are shared work but each person submits their own answers.
