@@ -191,3 +191,30 @@ Screenshot:
 Explanation:
 report.txt has 640: the owner can read and write (6), the group can only read (4), and others have no access (0).
 run.sh has 754: the owner can read, write and run it (7), the group can read and run it (5), and others can only read it (4).
+
+
+
+### Task 3
+
+Commands:
+```
+cd ~/assignment/linux
+printf 'INFO start\nERROR disk full\nINFO user login\nWARN slow response\nERROR timeout\nINFO user logout\nERROR disk full\nINFO backup done\nWARN memory high\nERROR timeout\nINFO restart\nERROR disk full\n' > server.log
+grep ERROR server.log | wc -l
+grep WARN server.log | wc -l
+grep ERROR server.log | grep disk
+```
+
+Output:
+
+faraz@faraz-HP-Pavilion-m7-Notebook-PC:~/assignment/linux$ grep ERROR server.log | wc -l
+5
+faraz@faraz-HP-Pavilion-m7-Notebook-PC:~/assignment/linux$ grep WARN server.log | wc -l
+2
+faraz@faraz-HP-Pavilion-m7-Notebook-PC:~/assignment/linux$ grep ERROR server.log | grep disk
+ERROR disk full
+ERROR disk full
+ERROR disk full
+
+Explanation:
+Grep is used to find lines containing a word. Pipe (|) sends the output to the next command and wc -l counts the lines.
