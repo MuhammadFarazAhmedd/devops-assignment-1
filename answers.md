@@ -17,11 +17,9 @@ git config user.email
 ```
 
 Output:
-```
 Initialized empty Git repository in /home/faraz/devops-assignment-1/.git/
 MuhammadFarazAhmedd
 fu96555@gmail.com
-```
 
 Explanation:
 Git init is used to start git in our folder. It create a hidden .git folder where project history is saved. Username and email is set so git can identify who made the changes.
@@ -66,7 +64,6 @@ nothing added to commit but untracked files present (use "git add" to track)
  create mode 100644 .gitignore
  create mode 100644 README.md
  create mode 100644 answers.md
-```
 
 Explanation:
 I have set up directories and files. In addition, I have produced a .gitignore document so that Git ignores log files, a tmp directory and .env. Git status then displays just the non-ignored files. I can then add and commit files to Git.
@@ -218,3 +215,45 @@ ERROR disk full
 
 Explanation:
 Grep is used to find lines containing a word. Pipe (|) sends the output to the next command and wc -l counts the lines.
+
+
+### Task 4
+
+Commands:
+```
+sleep 600 &
+ps
+kill 42756
+ps
+sleep 600 &
+ps
+kill -9 42929
+ps
+```
+
+Output:
+[1] 42756
+    PID TTY          TIME CMD
+  12520 pts/0    00:00:00 bash
+  42756 pts/0    00:00:00 sleep
+  42765 pts/0    00:00:00 ps
+    PID TTY          TIME CMD
+  12520 pts/0    00:00:00 bash
+  42800 pts/0    00:00:00 ps
+[1]+  Terminated                 sleep 600
+[1] 42929
+    PID TTY          TIME CMD
+  12520 pts/0    00:00:00 bash
+  42929 pts/0    00:00:00 sleep
+  42939 pts/0    00:00:00 ps
+    PID TTY          TIME CMD
+  12520 pts/0    00:00:00 bash
+  42956 pts/0    00:00:00 ps
+[1]+  Killed                     sleep 600
+
+Screenshot:
+
+![Part 2 Task 4](screenshots/p2t4.png)
+
+Explanation:
+kill sends SIGTERM, which is a polite request that lets the program clean up and close, so I use it first. kill -9 sends SIGKILL, which forces the process to stop immediately without any cleanup, so I use it only when a program is stuck.
