@@ -482,3 +482,59 @@ Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
 remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
 To github.com:MuhammadFarazAhmedd/devops-assignment-1.git
    8317360..13e660b  main -> main
+
+
+## Part 5
+
+### Task 1: apache2
+
+**Commands:**
+sudo apt update
+sudo apt install -y apache2
+systemctl status apache2
+sudo systemctl stop apache2
+systemctl status apache2
+curl localhost
+sudo systemctl start apache2
+sudo systemctl enable apache2
+systemctl is-enabled apache2
+sudo journalctl -u apache2 --since today
+
+**Output:**
+- After install, status shows:
+  Active: active (running) since Sat 2026-11-28 02:27:29 PKT
+- After stop, status shows:
+  Active: inactive (dead)
+- curl localhost shows:
+  curl: (7) Failed to connect to localhost port 80 after 0 ms: Couldn't connect to server
+- systemctl is-enabled apache2 shows:
+  enabled
+- journalctl shows lines like:
+  Nov 28 02:27:29 faraz-HP-Pavilion-m7-Notebook-PC systemd[1]: Starting apache2.service - The Apache HTTP Server...
+  Nov 28 02:27:29 faraz-HP-Pavilion-m7-Notebook-PC systemd[1]: Started apache2.service - The Apache HTTP Server.
+
+(Screenshots: screenshots/p5t1-stopped.png and screenshots/p5t1.png)
+
+**Explanation:**
+systemctl start runs the service right now, but it will not start again after a reboot. systemctl enable makes it start automatically at every boot, but it does not start it right now.
+After stop, the status is inactive (dead) and curl cannot connect because nothing is listening on port 80. journalctl -u apache2 --since today shows only today's logs of the apache2 service.
+
+### Task 2: Environment variable
+
+**Commands:**
+export APP_ENV=staging
+echo $APP_ENV
+printenv APP_ENV
+
+**Output (first terminal):**
+staging
+staging
+
+**Output (new terminal):**
+(empty line)
+(empty line)
+
+**Explanation:**
+export only sets the variable for the current terminal. A new terminal starts fresh, so the variable is gone. To make it permanent I would add export APP_ENV=staging to the ~/.bashrc file.
+
+
