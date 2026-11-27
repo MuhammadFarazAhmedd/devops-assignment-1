@@ -144,3 +144,50 @@ These stages work in a loop. First four are Dev stages and last four are Ops sta
 2.Blameless review after an outage: Continual Learning, because we learn from mistakes.
 
 3.Small daily releases instead of one big quarterly release: Flow, because small changes are easier and faster.
+
+
+## Part 2
+
+### Task 1
+
+Commands:
+```
+mkdir -p ~/assignment/linux/data/reports ~/assignment/linux/data/archive
+ls -R ~/assignment/linux
+```
+
+Output:
+
+/home/faraz/assignment/linux:
+data
+
+/home/faraz/assignment/linux/data:
+archive  reports
+
+Explanation:
+mkdir -p creates the full path including the parent folders, and it does not give an error if the folders already exist.
+
+### Task 2
+
+Commands:
+```
+cd ~/assignment/linux
+touch report.txt run.sh
+chmod 640 report.txt
+chmod 754 run.sh
+ls -l
+```
+
+Output:
+total 4
+drwxrwxr-x 4 faraz faraz 4096 Nov 27 23:30 data
+-rw-r----- 1 faraz faraz    0 Nov 27 23:48 report.txt
+-rwxr-xr-- 1 faraz faraz    0 Nov 27 23:48 run.sh
+
+Screenshot:
+
+![Part 2 Task 2](screenshots/p2t2.png)
+
+Explanation:
+report.txt has 640: the owner can read and write (6), the group can only read (4), and others have no access (0).
+run.sh has 754: the owner can read, write and run it (7), the group can read and run it (5), and others can only read it (4).
