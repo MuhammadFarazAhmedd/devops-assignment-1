@@ -257,3 +257,49 @@ Screenshot:
 
 Explanation:
 kill sends SIGTERM, which is a polite request that lets the program clean up and close, so I use it first. kill -9 sends SIGKILL, which forces the process to stop immediately without any cleanup, so I use it only when a program is stuck.
+
+
+
+
+## Part 3
+
+### Task 3
+
+Commands:
+```
+echo "Author: Muhammad Faraz Ahmed" >> README.md
+git status
+git add README.md
+git status
+git commit -m "Part 3: add author to README"
+```
+
+Output after editing (working directory):
+```
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Output after git add (staging area):
+```
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   README.md
+
+```
+
+Output after git commit (repository):
+```
+[main 747bf84] Part 3: add author to README
+ 1 file changed, 1 insertion(+)
+```
+
+Explanation:
+After I edited README.md, the change was in the working directory. After git add, it moved to the staging area. After git commit, it was saved in the repository.
+
