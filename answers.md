@@ -595,8 +595,7 @@ Tell him to word it himself — the assignment says partner tasks are shared wor
 
 ## Part 6
 
-### Task 1: sys_report.sh
-
+### Task 1:
 Script:
 #!/bin/bash
 HOST=$(hostname)
@@ -624,3 +623,95 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 Explanation:
 The script stores the hostname and today's date in variables using $( ), which runs a command and saves its answer. It then prints the hostname, date, current user and the disk usage of / using df -h (human-readable sizes). chmod +x gives the file execute permission so it can be run with ./sys_report.sh.
+
+
+### Task 2: 
+
+**Script:**
+#!/bin/bash
+SOURCE="$HOME/assignment/linux"
+DEST="$HOME/assignment/backups"
+TIMESTAMP=$(date +%Y-%m-%d-%H%M)
+
+if [ ! -d "$SOURCE" ]; then
+  echo "Error: source folder $SOURCE does not exist"
+  exit 1
+fi
+
+mkdir -p "$DEST"
+tar -czf "$DEST/linux-$TIMESTAMP.tar.gz" -C "$HOME/assignment" linux
+echo "Backup saved: $DEST/linux-$TIMESTAMP.tar.gz"
+
+**Output (Step 3, success case):**
+Backup saved: /home/faraz/assignment/backups/linux-2026-11-28-0318.tar.gz
+0
+
+**Output (Step 4, inside the backup):**
+linux/
+linux/data/
+linux/data/reports/
+linux/data/archive/
+linux/report.txt
+linux/run.sh
+linux/server.log
+linux/answers.md
+
+**Output (Step 5, error case):**
+Error: source folder /home/faraz/assignment/linux does not exist
+1
+
+**Explanation:**
+The script checks if the source folder exists with [ ! -d "$SOURCE" ]. If it does not exist, it prints an error and exits with code 1 (failure). Otherwise it creates the backups folder with mkdir -p, makes a compressed .tar.gz archive with tar -czf, and puts the date and time in the file name using $(date +%Y-%m-%d-%H%M). Exit code 0 means success and 1 means failure.
+
+
+##Task 3
+
+Script:
+
+```
+#!/bin/bash
+URL="http://localhost"
+CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+
+if [ "$CODE" = "200" ]; then
+  echo "$(date '+%Y-%m-%d %H:%M:%S') OK"
+else
+  echo "$(date '+%Y-%m-%d %H:%M:%S') FAIL: HTTP code $CODE"
+  exit 1
+fi
+```
+
+Commands:
+
+```
+chmod +x site_check.sh
+sudo systemctl start apache2
+./site_check.sh
+echo $?
+sudo systemctl stop apache2
+./site_check.sh
+echo $?
+sudo systemctl start apache2
+```
+
+Output (apache2 running):
+
+```
+2026-11-28 03:38:59 OK
+0
+```
+
+Output (apache2 stopped):
+
+```
+2026-11-28 03:39:59 FAIL: HTTP code 000
+1
+```
+
+Explanation:
+
+curl -s runs quietly without a progress bar. -o /dev/null throws away the page content because only the status is needed, and -w "%{http_code}" prints just the HTTP status code. A code of 200 means the web server answered correctly. A code of 000 means curl could not connect at all, which happens when apache2 is stopped.
+
+exit 1 tells the system the check failed. This is useful for cron and other programs, because they can read the exit code to know whether the website is up.
+
+
