@@ -330,3 +330,54 @@ c791769 Part 2: Task 3 answer
 
 Explanation:
 git remote add origin connects my local folder to the GitHub repository, and origin is just a nickname for that address. git push -u origin main uploads my commits to GitHub and remembers the link, so next time I only need git push.
+
+
+
+## Part 4
+
+### Task 1
+
+Commands:
+```
+git switch -c add-notes
+echo "# Notes" > notes.md
+git add notes.md
+git commit -m "Add notes.md"
+echo "Branches keep work separate until it is ready." >> notes.md
+git commit -am "Edit notes.md"
+git switch main
+git merge add-notes
+git branch -d add-notes
+git log --oneline --graph
+```
+
+Output:
+```
+Switched to a new branch 'add-notes'
+[add-notes 3963733] Add notes.md
+ 1 file changed, 1 insertion(+)
+ create mode 100644 notes.md
+[add-notes 647b737] Edit notes.md
+ 1 file changed, 1 insertion(+)
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+Updating 432a0c6..647b737
+Fast-forward
+ notes.md | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 notes.md
+Deleted branch add-notes (was 647b737).
+* 647b737 (HEAD -> main) Edit notes.md
+* 3963733 Add notes.md
+* 432a0c6 (origin/main) Part 3: Git and GitHub answers
+* 801bea4 Part 3: Task 3 answer
+* 747bf84 Part 3: add author to README
+* 45ff934 Part 2: Task 3 and 4 answers
+* c791769 Part 2: Task 3 answer
+* 759200b Part 2: Task 1 and 2 answers
+* 91758f2 Part 1: DevOps concepts answers
+* 5dbd696 Part 3: add README, answers and .gitignore
+```
+
+Explanation:
+Yes, it was a fast-forward. Nothing new was committed on main after I created add-notes, so Git just moved main forward to the branch's last commit without making a merge commit.
