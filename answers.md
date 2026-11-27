@@ -381,3 +381,84 @@ Deleted branch add-notes (was 647b737).
 
 Explanation:
 Yes, it was a fast-forward. Nothing new was committed on main after I created add-notes, so Git just moved main forward to the branch's last commit without making a merge commit.
+
+
+
+
+### Task 2
+
+Commands:
+```
+echo "Hello from main" > greeting.txt
+git add greeting.txt
+git commit -m "Add greeting.txt"
+git switch -c branch-a
+echo "Hello from A" > greeting.txt
+git commit -am "Branch A greeting"
+git switch main
+git switch -c branch-b
+echo "Hello from B" > greeting.txt
+git commit -am "Branch B greeting"
+git switch main
+git merge branch-a
+git merge branch-b
+cat greeting.txt
+```
+
+Output:
+```
+[main 2b3315a] Add greeting.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 greeting.txt
+Switched to a new branch 'branch-a'
+[branch-a a95227f] Branch A greeting
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+<<<<<<< HEAD shows my current branch version.
+======= separates both versions.
+
+branch-b shows the other branch version.
+
+Git cannot merge them because both branches changed the same line. So we have to choose which version is correct.Switched to branch 'main'
+Switched to a new branch 'branch-b'
+[branch-b 1226e30] Branch B greeting
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Switched to branch 'main'
+Updating 2b3315a..a95227f
+Fast-forward
+ greeting.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Auto-merging greeting.txt
+CONFLICT (content): Merge conflict in greeting.txt
+Automatic merge failed; fix conflicts and then commit the result.
+<<<<<<< HEAD
+Hello from A
+=======
+Hello from B
+>>>>>>> branch-b
+```
+
+How I fixed it:
+```
+printf 'Hello from A\nHello from B\n' > greeting.txt
+git add greeting.txt
+git commit -m "Resolve conflict: keep both greetings"
+git branch -d branch-a branch-b
+git push
+```
+
+Explanation:
+<<<<<<< HEAD is the start of the version on my current branch (main).
+======= is the line that separates the two versions.
+>>>>>>> branch-b is the end of the version coming from branch-b.
+Git could not decide because both branches changed the same line in different ways. Only a person knows which version is correct, so Git stops and asks.
+
+
+## Part 4, Task 3
+
+My pull request to my partner:
+https://github.com/alibaqir110-web/devops-assignment-1/pull/1
+
+My partner's pull request to me:
+https://github.com/MuhammadFarazAhmedd/devops-assignment-1/pull/1
+
+Partner's name: Ali Baqir
