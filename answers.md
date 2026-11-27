@@ -591,3 +591,36 @@ Explanation:
 He writes his own explanation — same points as yours: the private key (`~/.ssh/id_ed25519`, no `.pub`) must stay on his machine only; the public key is safe to share and is what gets installed in your authorized_keys; if someone copies his private key they can log in as him to every machine and GitHub account that trusts it.
 
 Tell him to word it himself — the assignment says partner tasks are shared work but each person submits their own answers.
+
+
+## Part 6
+
+### Task 1: sys_report.sh
+
+Script:
+#!/bin/bash
+HOST=$(hostname)
+TODAY=$(date +%Y-%m-%d)
+
+echo "Hostname: $HOST"
+echo "Date: $TODAY"
+echo "Current user: $(whoami)"
+echo "Disk usage of /:"
+df -h /
+
+Commands:
+cd ~/devops-assignment-1/scripts
+nano sys_report.sh
+chmod +x sys_report.sh
+./sys_report.sh
+
+Output:
+Hostname: faraz-HP-Pavilion-m7-Notebook-PC
+Date: 2026-11-28
+Current user: faraz
+Disk usage of /:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdb4        53G   12G   39G  24% /
+
+Explanation:
+The script stores the hostname and today's date in variables using $( ), which runs a command and saves its answer. It then prints the hostname, date, current user and the disk usage of / using df -h (human-readable sizes). chmod +x gives the file execute permission so it can be run with ./sys_report.sh.
