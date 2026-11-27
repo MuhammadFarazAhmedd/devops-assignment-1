@@ -1,3 +1,4 @@
+
 # Answers - DevOps Assignment 1
 
 
@@ -462,3 +463,22 @@ My partner's pull request to me:
 https://github.com/MuhammadFarazAhmedd/devops-assignment-1/pull/1
 
 Partner's name: Ali Baqir
+
+## Part 4, Task 4
+
+Commands:echo "Part 6: scripts are in scripts/ and run with cron." >> notes.md
+git commit -am "Add Part 6 notes. Closes #2"
+git push
+
+Output:
+[main 13e660b] Part 4: Task 3 pull request links
+ 1 file changed, 81 insertions(+)
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 1.12 KiB | 1.12 MiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:MuhammadFarazAhmedd/devops-assignment-1.git
+   8317360..13e660b  main -> main
