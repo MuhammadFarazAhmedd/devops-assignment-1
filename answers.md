@@ -303,3 +303,30 @@ Output after git commit (repository):
 Explanation:
 After I edited README.md, the change was in the working directory. After git add, it moved to the staging area. After git commit, it was saved in the repository.
 
+
+
+### Task 4
+
+Commands:
+```
+git remote add origin git@github.com:MuhammadFarazAhmedd/devops-assignment-1.git
+git push -u origin main
+git remote -v
+git log --oneline
+```
+
+Output:
+```
+origin  git@github.com:MuhammadFarazAhmedd/devops-assignment-1.git (fetch)
+origin  git@github.com:MuhammadFarazAhmedd/devops-assignment-1.git (push)
+801bea4 (HEAD -> main, origin/main) Part 3: Task 3 answer
+747bf84 Part 3: add author to README
+45ff934 Part 2: Task 3 and 4 answers
+c791769 Part 2: Task 3 answer
+759200b Part 2: Task 1 and 2 answers
+91758f2 Part 1: DevOps concepts answers
+5dbd696 Part 3: add README, answers and .gitignore
+```
+
+Explanation:
+git remote add origin connects my local folder to the GitHub repository, and origin is just a nickname for that address. git push -u origin main uploads my commits to GitHub and remembers the link, so next time I only need git push.
