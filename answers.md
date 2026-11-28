@@ -1,6 +1,12 @@
+Name: Muhammad Faraz Ahmed
+ID No.:65634
+Class Id:120823
+Partner's name: Muhammad Faraz Ahmed
+GitHub repo: https://github.com/MuhammadFarazAhmedd/devops-assignment-1
+Partner's PR to me: https://github.com/MuhammadFarazAhmedd/devops-assignment-1/pull/1
+My PR to partner: https://github.com/alibaqir110-web/devops-assignment-1/pull/1
 
 # Answers - DevOps Assignment 1
-
 
 ## Part 3, Task 1
 
@@ -24,7 +30,6 @@ fu96555@gmail.com
 
 Explanation:
 Git init is used to start git in our folder. It create a hidden .git folder where project history is saved. Username and email is set so git can identify who made the changes.
-
 
 
 
@@ -259,7 +264,28 @@ Screenshot:
 Explanation:
 kill sends SIGTERM, which is a polite request that lets the program clean up and close, so I use it first. kill -9 sends SIGKILL, which forces the process to stop immediately without any cleanup, so I use it only when a program is stuck.
 
+### Task 5
 
+Commands:
+```
+whoami
+groups
+sudo apt update
+```
+
+Output:
+```
+faraz
+faraz adm cdrom sudo dip plugdev users lpadmin lxd
+Hit:1 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:2 http://pk.archive.ubuntu.com/ubuntu resolute InRelease
+Hit:3 http://pk.archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:4 http://pk.archive.ubuntu.com/ubuntu resolute-backports InRelease
+All packages are up to date.
+```
+
+Explanation:
+sudo gives admin power for only one command, asks for my password and is logged. If I stayed logged in as root, every command and every typo would run with full power and could break the whole system.
 
 
 ## Part 3
@@ -306,7 +332,7 @@ After I edited README.md, the change was in the working directory. After git add
 
 
 
-### Task 4
+### Part-3 Task 4
 
 Commands:
 ```
@@ -454,7 +480,7 @@ Explanation:
 Git could not decide because both branches changed the same line in different ways. Only a person knows which version is correct, so Git stops and asks.
 
 
-## Part 4, Task 3
+## Task 3
 
 My pull request to my partner:
 https://github.com/alibaqir110-web/devops-assignment-1/pull/1
@@ -464,7 +490,7 @@ https://github.com/MuhammadFarazAhmedd/devops-assignment-1/pull/1
 
 Partner's name: Ali Baqir
 
-## Part 4, Task 4
+## Task 4
 
 Commands:echo "Part 6: scripts are in scripts/ and run with cron." >> notes.md
 git commit -am "Add Part 6 notes. Closes #2"
@@ -488,7 +514,7 @@ To github.com:MuhammadFarazAhmedd/devops-assignment-1.git
 
 ### Task 1:
 
-**Commands:**
+Commands:
 sudo apt update
 sudo apt install -y apache2
 systemctl status apache2
@@ -500,7 +526,7 @@ sudo systemctl enable apache2
 systemctl is-enabled apache2
 sudo journalctl -u apache2 --since today
 
-**Output:**
+Output:
 - After install, status shows:
   Active: active (running) since Sat 2026-11-28 02:27:29 PKT
 - After stop, status shows:
@@ -515,26 +541,26 @@ sudo journalctl -u apache2 --since today
 
 (Screenshots: screenshots/p5t1-stopped.png and screenshots/p5t1.png)
 
-**Explanation:**
+Explanation:
 systemctl start runs the service right now, but it will not start again after a reboot. systemctl enable makes it start automatically at every boot, but it does not start it right now.
 After stop, the status is inactive (dead) and curl cannot connect because nothing is listening on port 80. journalctl -u apache2 --since today shows only today's logs of the apache2 service.
 
 ### Task 2: 
 
-**Commands:**
+Commands:
 export APP_ENV=staging
 echo $APP_ENV
 printenv APP_ENV
 
-**Output (first terminal):**
+Output (first terminal):
 staging
 staging
 
-**Output (new terminal):**
+Output (new terminal):
 (empty line)
 (empty line)
 
-**Explanation:**
+Explanation:
 export only sets the variable for the current terminal. A new terminal starts fresh, so the variable is gone. To make it permanent I would add export APP_ENV=staging to the ~/.bashrc file.
 
 
@@ -627,7 +653,7 @@ The script stores the hostname and today's date in variables using $( ), which r
 
 ### Task 2: 
 
-**Script:**
+Script:
 #!/bin/bash
 SOURCE="$HOME/assignment/linux"
 DEST="$HOME/assignment/backups"
@@ -642,11 +668,11 @@ mkdir -p "$DEST"
 tar -czf "$DEST/linux-$TIMESTAMP.tar.gz" -C "$HOME/assignment" linux
 echo "Backup saved: $DEST/linux-$TIMESTAMP.tar.gz"
 
-**Output (Step 3, success case):**
+Output (Step 3, success case):
 Backup saved: /home/faraz/assignment/backups/linux-2026-11-28-0318.tar.gz
 0
 
-**Output (Step 4, inside the backup):**
+Output (Step 4, inside the backup):
 linux/
 linux/data/
 linux/data/reports/
@@ -656,11 +682,11 @@ linux/run.sh
 linux/server.log
 linux/answers.md
 
-**Output (Step 5, error case):**
+Output (Step 5, error case):
 Error: source folder /home/faraz/assignment/linux does not exist
 1
 
-**Explanation:**
+Explanation:
 The script checks if the source folder exists with [ ! -d "$SOURCE" ]. If it does not exist, it prints an error and exits with code 1 (failure). Otherwise it creates the backups folder with mkdir -p, makes a compressed .tar.gz archive with tar -czf, and puts the date and time in the file name using $(date +%Y-%m-%d-%H%M). Exit code 0 means success and 1 means failure.
 
 
@@ -715,3 +741,46 @@ curl -s runs quietly without a progress bar. -o /dev/null throws away the page c
 exit 1 tells the system the check failed. This is useful for cron and other programs, because they can read the exit code to know whether the website is up.
 
 
+## Task 4
+
+Commands:
+
+```
+echo $HOME
+crontab -e
+crontab -l
+tail ~/assignment/cron.log
+```
+
+Cron line:
+
+```
+*/2 * * * * /home/faraz/devops-assignment-1/scripts/site_check.sh >> /home/faraz/assignment/cron.log 2>&1
+```
+
+Output (crontab -l):
+
+```
+*/2 * * * * /home/faraz/devops-assignment-1/scripts/site_check.sh >> /home/faraz/assignment/cron.log 2>&1
+```
+
+Output (last log lines):
+
+```
+2026-11-28 03:50:02 OK
+PASTE: baaqi lines jo tail ~/assignment/cron.log mein aayein (03:52, 03:54, 03:56 wagera)
+```
+
+Cron expressions:
+
+```
+(a) Every day at 14:30:
+30 14 * * *
+
+(b) Monday to Friday at 06:00:
+0 6 * * 1-5
+```
+
+Explanation:
+
+A cron line has 5 time fields followed by the command: minute, hour, day of month, month and weekday. A * means every value. */2 in the minute field means every 2 minutes, so site_check.sh runs automatically every 2 minutes. The >> symbol appends the output to cron.log instead of overwriting it, and 2>&1 sends error messages to the same file. For (a), 30 is the minute, 14 is the hour and the three stars mean every day, month and weekday. For (b), 0 6 means 06:00 and 1-5 in the weekday field means Monday to Friday.
